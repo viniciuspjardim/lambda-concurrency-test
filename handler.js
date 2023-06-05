@@ -18,8 +18,8 @@ function simulateAsyncIO() {
   });
 }
 
-module.exports.hello = async (event) => {
-  const { client } = event.body;
+module.exports.handler = async function (event) {
+  const { client } = JSON.parse(event.body);
 
   console.log("1. before mutation", stringify({ client, globalData }));
 

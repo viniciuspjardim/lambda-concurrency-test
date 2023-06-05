@@ -1,4 +1,4 @@
-service: lambda-cache-test
+service: lambda-concurrency-test
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
@@ -16,6 +16,10 @@ provider:
 
 functions:
   hello:
-    handler: handler.hello
-    name: lambda-cache-test-hello
-    reservedConcurrency: 1
+    handler: handler.handler
+    name: lambda-concurrency-test-handler
+    events:
+      - http:
+          path: /
+          method: post
+          cors: true
