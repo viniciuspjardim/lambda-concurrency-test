@@ -1,10 +1,10 @@
 # Lambda Concurrency Test
 
-This is a test if AWS Lambda with Node.js can handle more than one connection per Node.js process. We know that it can handle multiple requests by creating new Node.js process, but it was not clear to me (by reading the docs alone), if one Node.js process could handle more than one connection.
+This is a test if AWS Lambda with Node.js can handle more than one connection per Node.js process. We know that it can handle multiple requests by creating a new Node.js process, but it was not clear to me (by reading the docs alone), if one Node.js process could handle more than one connection.
 
-Node.js has only one main thread, but it can handle multiple connections simultaneously when there are async operations. While it's awaiting IO for one client (a fetch for example), it can handle a connection for a second client. But in AWS Lambda documentation, apparently this is apparently not possible.
+Node.js has only one main thread, but it can handle multiple connections simultaneously when there are async operations. While it's awaiting IO for one client (a fetch for example), it can handle a connection for a second client. But referencing the documentation, this seems to not be possible in AWS Lambda.
 
-Although this test is too simple for a definitive conclusion, it indicates that AWS Lambda spawns one process per concurrent requests. If there are five concurrent requests, it will spawn five Lambda Node.js process.
+Although this test is too simple for a definitive conclusion, it indicates that AWS Lambda spawns one process per concurrent requests. If there are five concurrent requests, it will spawn five Lambda Node.js processes. This indicates that one Node.js process in Lambda handles only one client at time.
 
 ## Configuring and Deploying
 
